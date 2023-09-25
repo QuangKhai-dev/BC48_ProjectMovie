@@ -7,4 +7,7 @@ export const quanLyPhimServ = {
     // tham số thứ 2 là data, data sẽ được truyền vào nếu api cần gửi dữ liệu lên cụ thể là phương thức post
     return https.get('/api/QuanLyPhim/LayDanhSachBanner');
   },
+  getAllMovie: () => {
+    return https.get('/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01');
+  },
 };
