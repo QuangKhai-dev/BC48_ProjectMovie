@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDataUser } from '../../redux/userSlice';
 const Header = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
-  console.log(user);
+  // console.log(user);
+  useEffect(() => {
+    // gọi dữ liệu từ localStore lên
+    const userLocal = JSON.parse(localStorage.getItem('user'));
+    if (userLocal) {
+      dispatch(setDataUser(userLocal));
+    }
+  }, []);
+
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">

@@ -4,6 +4,7 @@ import BannerCarousel from '../../component/Carousel/Carousel';
 import ListMovie from '../../component/ListMovie/ListMovie';
 import { useDispatch } from 'react-redux';
 import { getAllMovieApi } from '../../redux/phimSlice';
+import TabHeThongRap from '../../component/TabHeThongRap/TabHeThongRap';
 const Home = () => {
   const dispatch = useDispatch();
   const [listBanner, setListBanner] = useState([]);
@@ -26,6 +27,7 @@ const Home = () => {
     <div>
       <BannerCarousel listBanner={listBanner} />
       <ListMovie />
+      <TabHeThongRap />
     </div>
   );
 };

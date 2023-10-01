@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 // import animation vào component
-import * as loginAnimation from './../../assest/animation/loginAnimation.json';
+import * as loginAnimation from './../../asset/animation/loginAnimation.json';
 const LoginAnimation = () => {
   const defaultOptions = {
     // animation lặp lại vô tận

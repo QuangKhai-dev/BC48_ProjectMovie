@@ -44,13 +44,41 @@ const BannerCarousel = ({ listBanner }) => {
     console.log(currentSlide);
   };
 
-  const removeContentModal = () => {
-    setContentModal('');
+  const SampleNextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block' }}
+        onClick={onClick}
+      >
+        <i className="fa-solid fa-arrow-right"></i>
+      </div>
+    );
+  };
+
+  const SamplePrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block' }}
+        onClick={onClick}
+      >
+        <i className="fa-solid fa-arrow-left"></i>
+      </div>
+    );
   };
 
   return (
     <>
-      <Carousel afterChange={onChange} id="banner" arrows={true}>
+      <Carousel
+        afterChange={onChange}
+        id="banner"
+        arrows={true}
+        nextArrow={<SampleNextArrow />}
+        prevArrow={<SamplePrevArrow />}
+      >
         {listBanner.map((item, index) => {
           console.log(item);
           // các slide chiều cao chưa giống nhau, nên có khoảng trắng

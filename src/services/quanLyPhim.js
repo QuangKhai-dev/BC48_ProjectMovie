@@ -8,6 +8,6 @@ export const quanLyPhimServ = {
     return https.get('/api/QuanLyPhim/LayDanhSachBanner');
   },
   getAllMovie: () => {
-    return https.get('/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01');
+    return https.get('/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP04');
   },
 };
