@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { quanLyRapServ } from '../../services/quanLyRap';
 import { Tabs } from 'antd';
+import moment from 'moment';
 import './tabLichChieu.scss';
 const TabLichChieu = ({ maHeThongRap }) => {
   const [cumRap, setCumRap] = useState([]);
@@ -21,7 +22,6 @@ const TabLichChieu = ({ maHeThongRap }) => {
       <Tabs
         tabPosition={'left'}
         items={cumRap.map((item, index) => {
-          // console.log(item);
           return {
             label: (
               <div className="text-left w-72">
@@ -31,24 +31,46 @@ const TabLichChieu = ({ maHeThongRap }) => {
             ),
             key: index,
             children: (
-              <div>
+              <div
+                className="space-y-4"
+                style={{ height: '516px', overflowY: 'scroll' }}
+              >
                 {item.danhSachPhim?.map((i, index) => {
                   return (
-                    <div className="flex">
+                    <div className="flex py-4">
                       {/* div về hình  */}
-                      <div>
-                        <img className="w-20 h-20" src={i.hinhAnh} alt="" />
+                      <div className="mr-3">
+                        <img
+                          className="w-20 h-full object-cover"
+                          src={i.hinhAnh}
+                          alt=""
+                        />
                       </div>
                       {/* div về thông tin phim  */}
                       <div>
-                        <h5>{i.tenPhim}</h5>
+                        <h5 className="text-xl font-medium">{i.tenPhim}</h5>
                         {/* đổ lịch chiếu phim  */}
                         <div className="grid grid-cols-2 gap-3">
                           {i.lstLichChieuTheoPhim
                             .slice(0, 4)
                             .map((lichChieu, index) => {
                               return (
-                                <p key={index}>{lichChieu.ngayChieuGioChieu}</p>
+                                <p
+                                  key={index}
+                                  className="py-2 px-4 bg-gray-100 border border-gray-400 rounded font-bold space-x-2"
+                                >
+                                  <span className="text-green-500">
+                                    {moment(lichChieu.ngayChieuGioChieu).format(
+                                      'DD-MM-YYYY'
+                                    )}
+                                  </span>
+                                  <span>~</span>
+                                  <span className="text-orange-500">
+                                    {moment(lichChieu.ngayChieuGioChieu).format(
+                                      'hh:mm'
+                                    )}
+                                  </span>
+                                </p>
                               );
                             })}
                         </div>
@@ -60,6 +82,7 @@ const TabLichChieu = ({ maHeThongRap }) => {
             ),
           };
         })}
+        className="tabLichChieu"
       />
     </div>
   );
