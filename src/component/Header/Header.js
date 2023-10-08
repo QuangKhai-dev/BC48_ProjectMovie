@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDataUser } from '../../redux/userSlice';
+import useWindowSize from '../../hooks/useWindowSize';
+import HeaderMobile from './HeaderMobile';
 const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userSlice);
+  // hooks useWindowSize giúp hỗ trợ kiểm tra màn hình để reponsive
+  const { widthWindow, heightWindow } = useWindowSize();
+  const [isMobile, setIsMobile] = useState(false);
   // console.log(user);
   useEffect(() => {
     // gọi dữ liệu từ localStore lên
@@ -13,8 +18,21 @@ const Header = () => {
       dispatch(setDataUser(userLocal));
     }
   }, []);
+  useEffect(() => {
+    // nếu widthWindow nhỏ hơn hoặc bằng 576px thì setIsMobile(true)
+    if (widthWindow <= 576) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  });
+  // console.log(isMobile);
+  // console.log(widthWindow);
 
-  return (
+  // sử dụng isMobile để kiểm tra, nếu mang giá trị true nghĩa là đang ở dưới màn hình mobile lúc đó sẽ hiện component HeaderMobile, còn ngược lại sẽ hiện header Laptop
+  return isMobile ? (
+    <HeaderMobile />
+  ) : (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">

@@ -21,6 +21,7 @@ const phimSlice = createSlice({
       // xử lí khi gọi dữ liệu thành công
       state.listPhim = action.payload;
     });
+    // builder.addCase(getAllMovieApi.rejected),
   },
 });
 

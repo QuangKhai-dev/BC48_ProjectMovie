@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
-    widthWindow: 0,
-    heightWindow: 0,
+    widthWindow: 1300,
+    heightWindow: 1300,
   });
 
   useEffect(() => {
@@ -15,5 +15,17 @@ function useWindowSize() {
     };
 
     handleSizeWindow();
+
+    // chạy hàm handleSizeWindow để bắt được chiều dài và chiều cao thiết bị khi giao diện thay đổi
+    window.addEventListener('resize', handleSizeWindow);
+
+    return () => {
+      // xoá bỏ hàm handleSizeWindow khi component không còn xuất hiện trên giao diện
+      window.removeEventListener('resize', handleSizeWindow);
+    };
   }, []);
+
+  return windowSize;
 }
+
+export default useWindowSize;
