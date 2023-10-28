@@ -8,4 +8,7 @@ export const quanLyNguoiDungServ = {
     // };
     return https.post('/api/QuanLyNguoiDung/DangNhap', data);
   },
+  // dangKy: (data) => {
+  //   return https.post('/api/QuanLyNguoiDung/DangKy', data);
+  // },
 };

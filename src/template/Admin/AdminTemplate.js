@@ -1,7 +1,7 @@
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   DesktopOutlined,
   FileOutlined,
@@ -10,6 +10,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -36,9 +38,17 @@ const items = [
 const AdminTemplate = () => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const { user } = useSelector((state) => state.userSlice);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  useEffect(() => {
+    // kiểm tra dữ liệu đang có, nếu như lấy dữ liệu người dùng và maLoaiNguoiDung là khách hàng thì sẽ không cho truy cập
+    if (user.maLoaiNguoiDung != 'QuanTri') {
+      window.location.href = 'https://www.google.com/';
+    }
+  }, []);
 
   return (
     <Layout
